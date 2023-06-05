@@ -1,0 +1,92 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SignupFrame extends JFrame {
+    private JTextField firstNameTextField;
+    private JTextField lastNameTextField;
+    private JTextField emailTextField;
+    private JTextField phoneTextField;
+    private JPasswordField passwordField;
+    private JPasswordField confirmPasswordField;
+
+    public SignupFrame() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Signup");
+        setSize(400, 300);
+        setLocationRelativeTo(null); // Center the frame
+
+        // Create panel and set layout
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(7, 2, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Add components to the panel
+        JLabel lblFirstName = new JLabel("First Name:");
+        firstNameTextField = new JTextField(20);
+
+        JLabel lblLastName = new JLabel("Last Name:");
+        lastNameTextField = new JTextField(20);
+
+        JLabel lblEmail = new JLabel("Email:");
+        emailTextField = new JTextField(20);
+
+        JLabel lblPhone = new JLabel("Phone:");
+        phoneTextField = new JTextField(20);
+
+        JLabel lblPassword = new JLabel("Password:");
+        passwordField = new JPasswordField(20);
+
+        JLabel lblConfirmPassword = new JLabel("Confirm Password:");
+        confirmPasswordField = new JPasswordField(20);
+
+        JButton btnSignup = new JButton("Signup");
+        btnSignup.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Get user input
+                String firstName = firstNameTextField.getText();
+                String lastName = lastNameTextField.getText();
+                String email = emailTextField.getText();
+                String phone = phoneTextField.getText();
+                String password = new String(passwordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                // Validate input and perform signup logic here
+                if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                    JOptionPane.showMessageDialog(SignupFrame.this, "Please fill in all fields.", "Signup Failed", JOptionPane.ERROR_MESSAGE);
+                } else if (!password.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(SignupFrame.this, "Passwords do not match. Please try again.", "Signup Failed", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Add signup logic here
+                    JOptionPane.showMessageDialog(SignupFrame.this, "Signup Successful!");
+                }
+            }
+        });
+
+        // Add components to the panel
+        panel.add(lblFirstName);
+        panel.add(firstNameTextField);
+        panel.add(lblLastName);
+        panel.add(lastNameTextField);
+        panel.add(lblEmail);
+        panel.add(emailTextField);
+        panel.add(lblPhone);
+        panel.add(phoneTextField);
+        panel.add(lblPassword);
+        panel.add(passwordField);
+        panel.add(lblConfirmPassword);
+        panel.add(confirmPasswordField);
+        panel.add(btnSignup);
+
+        // Set panel as content pane
+        setContentPane(panel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new SignupFrame().setVisible(true);
+            }
+        });
+    }
+}

@@ -1,0 +1,122 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class LoginPage extends JFrame {
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+
+    public LoginPage() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Login Page");
+        setSize(400, 200);
+        setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2));
+
+        JLabel usernameLabel = new JLabel("Username:");
+        usernameField = new JTextField();
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordField = new JPasswordField();
+
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+
+                // Perform login validation here
+                if (validateLogin(username, password)) {
+                    openAdminSuccessFrame();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(LoginPage.this, "Invalid username or password", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(loginButton);
+
+        add(panel);
+        setVisible(true);
+    }
+
+    private boolean validateLogin(String username, String password) {
+        // Add your login validation logic here
+        // For example, check if the username and password match with stored credentials
+        return username.equals("Ayush") && password.equals("ayush");
+    }
+
+    private void openAdminSuccessFrame() {
+        JFrame adminSuccessFrame = new JFrame();
+        adminSuccessFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        adminSuccessFrame.setTitle("Admin Success");
+        adminSuccessFrame.setSize(400, 300);
+        adminSuccessFrame.setLocationRelativeTo(null);
+
+        JButton addItemButton = new JButton("Add Item");
+        JButton viewItemButton = new JButton("View Item");
+        JButton deleteItemButton = new JButton("Delete Item");
+        JButton UpdateItemButton = new JButton("Update Item");
+        JButton AvailableItemButton = new JButton("Available Item");
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 1));
+        panel.add(new JLabel("Welcome, Admin!"));
+        panel.add(addItemButton);
+        panel.add(viewItemButton);
+        panel.add(deleteItemButton);
+        panel.add(UpdateItemButton);
+        panel.add(AvailableItemButton);
+
+        adminSuccessFrame.add(panel);
+        adminSuccessFrame.setVisible(true);
+
+        addItemButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform add item operation
+                JOptionPane.showMessageDialog(adminSuccessFrame, "Add item operation performed");
+            }
+        });
+
+        viewItemButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform view item operation
+                JOptionPane.showMessageDialog(adminSuccessFrame, "View item operation performed");
+            }
+        });
+
+        deleteItemButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform delete item operation
+                JOptionPane.showMessageDialog(adminSuccessFrame, "Delete item operation performed");
+            }
+        });
+         UpdateItemButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform delete item operation
+                JOptionPane.showMessageDialog(adminSuccessFrame, "Update item operation performed");
+            }
+        }); 
+        AvailableItemButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform delete item operation
+                JOptionPane.showMessageDialog(adminSuccessFrame, "Available item operation performed");
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new LoginPage();
+            }
+        });
+    }
+}
